@@ -4,6 +4,7 @@ import { commandHelp } from "./command_help.js";
 import { PokeAPI } from "./pokeapi.js";
 import { map } from "./command_map.js";
 import { mapb } from "./command_mapb.js";
+import { explore } from "./command_explore.js";
 
 export type State = {
   pokeApi: PokeAPI
@@ -16,7 +17,7 @@ export type State = {
 export type CLICommand = {
   name: string;
   description: string;
-  callback: (state: State) => Promise<void>;
+  callback: (state: State , ...args: string[]) => Promise<void>;
 };
 
 export function initState():State {
@@ -50,8 +51,13 @@ export function initState():State {
         name: "mapb",
         description: "map back the lcoations list",
         callback:mapb
-      }
+      },
+      explore: {
+        name: "explore",
+        description: "Explore a specific location",
+        callback:explore
+      },
    }
-  }
+  };
 
 }
