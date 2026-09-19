@@ -1,3 +1,4 @@
+import { url } from "inspector/promises";
 import {Cache} from "./pokeCache.js";
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
@@ -44,8 +45,29 @@ export class PokeAPI {
       throw e;
     }
   }
-}
 
+  
+async fetchPokemon(pokemonName: string): Promise<Pokemon | null> {
+    try {
+      const url = PokeAPI.baseURL+"/pokemon/"+pokemonName;
+      if (this.cache.get<Pokemon>(url)) {
+        return this.cache.get<Pokemon>(url)!;
+      }
+      const response = await fetch(url);
+      if (response.status === 404) {
+        return null;
+      }
+      if (!response.ok) {
+        throw new Error(`Response status : ${response.status}`);
+      }
+      const result = await response.json();
+      this.cache.add<Pokemon>(url, result);
+      return result;
+    } catch (e) {
+      throw e;
+    }
+  } 
+}
 
 export type ShallowLocations = {
   count: number
@@ -64,3 +86,14 @@ export type Location = {
     }
   }[];
   };
+export type Pokemon = {
+  name: string,
+  url: string,
+  id: number,
+  height: number,
+  weight: number,
+  base_experience: number,
+  types: string[],
+  abilities: string[],
+  stats: Record<string, number>,
+} 
