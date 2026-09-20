@@ -13,7 +13,7 @@ export async function catchPokemon(state: State,name:string) {
   console.log(`Throwing a Pokeball at ${pokemon.name}...`);
   const chance = 100/(pokemon.base_experience + 100)
     if (Math.random() > chance){
-      state.pokedex[pokemon.name] = pokemon;
+      state.caughtPokemons[pokemon.name] = pokemon;
       console.log(`${pokemon.name} was caught!`);
     } else {
       console.log(`${pokemon.name} escaped!`);

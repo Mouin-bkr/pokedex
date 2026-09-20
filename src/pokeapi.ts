@@ -1,8 +1,8 @@
-import { url } from "inspector/promises";
 import {Cache} from "./pokeCache.js";
 export class PokeAPI {
   private static readonly baseURL = "https://pokeapi.co/api/v2";
   private readonly cache = new Cache(5000); // 5 seconds
+
 
   constructor() { }
 
@@ -66,6 +66,10 @@ async fetchPokemon(pokemonName: string): Promise<Pokemon | null> {
     } catch (e) {
       throw e;
     }
+  }
+
+  CloseCache() {
+    this.cache.stopReapLoop();
   } 
 }
 
@@ -88,12 +92,13 @@ export type Location = {
   };
 export type Pokemon = {
   name: string,
-  url: string,
-  id: number,
   height: number,
   weight: number,
   base_experience: number,
-  types: string[],
-  abilities: string[],
-  stats: Record<string, number>,
+  types: {type: NameRessource }[],
+  abilities: {ability: NameRessource }[],
+  stats: {base_stat:number, stat:NameRessource}[],
 } 
+type NameRessource = {
+    name: string
+  }
