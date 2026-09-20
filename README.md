@@ -103,3 +103,4 @@ Environment knobs useful while recording: `BATTLE_DELAY_MS` (pause between battl
 ## Credits
 
 Built as part of the [Boot.dev](https://boot.dev) "Build a Pokedex" project, then extended with ball types, battles, encounters, persistence and tests. Data from [PokeAPI](https://pokeapi.co).
+[![Boot.dev Build a Pokedex in TypeScript certificate](https://qvault-webapp-dynamic-assets.storage.googleapis.com/certificates/ca96a220-8963-4059-afa9-d8f774ebd155.jpeg?v=1789888642)](https://www.boot.dev/certificates/ca96a220-8963-4059-afa9-d8f774ebd155)
