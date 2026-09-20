@@ -68,7 +68,7 @@ async fetchPokemon(pokemonName: string): Promise<Pokemon | null> {
     }
   }
 
-  CloseCache() {
+  closeCache() {
     this.cache.stopReapLoop();
   } 
 }
